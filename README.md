@@ -13,6 +13,7 @@ Depends on:
 * https://github.com/kujukuju/JaiCapture
 * https://github.com/kujukuju/JaiBoundingTree
 * https://github.com/kujukuju/FixedStringJai
+* https://github.com/kujukuju/JaiMath
 
 
 ## Run
