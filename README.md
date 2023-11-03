@@ -5,7 +5,7 @@
 
 Depends on:
 * https://github.com/kujukuju/JaiSerializer
-* https://github.com/kujukuju/JaiSerializer
+* https://github.com/kujukuju/websocketpp-jai
 * https://github.com/kujukuju/KodaJai
 * https://github.com/kujukuju/JaiGLFW
 
