@@ -7,19 +7,17 @@ TICK_DURATION :: 1000 / ROOM_TICKRATE;
 #add_context player_manager: *PlayerManager;
 
 main :: () {
-    init_time();
-
     context.packet_server = packet_server_create(4080);
 
     player_manager: PlayerManager;
     context.player_manager = *player_manager;
 
     while true {
-        start := get_time() * 1000;
+        start := seconds_since_init() * 1000;
 
         server_loop(start);
 
-        end := get_time() * 1000;
+        end := seconds_since_init() * 1000;
 
         duration := end - start;
         remainder := max(TICK_DURATION - duration, 0);
@@ -27,7 +25,7 @@ main :: () {
             // poll while paused instead of wasting the cpu
             packet_server_poll(context.packet_server);
 
-            duration = get_time() * 1000 - start;
+            duration = seconds_since_init() * 1000 - start;
             remainder = max(TICK_DURATION - duration, 0);
         }
 

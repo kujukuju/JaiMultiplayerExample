@@ -70,7 +70,7 @@ packet_server_create :: (port: int) -> *PacketServer {
         server_context := packet_server.server_context;
 
         push_context server_context {
-            time := get_time() * 1000.0;
+            time := seconds_since_init() * 1000.0;
 
             lock(*packet_server.mutex);
             defer unlock(*packet_server.mutex);

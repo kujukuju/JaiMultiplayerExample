@@ -7,11 +7,13 @@ TICKRATE :: 60;
 TICK_DURATION :: 1000 / TICKRATE;
 
 main :: () {
-    init_time();
     koda_init();
 
     create_window("Multiplayer Example", 1600, 900);
     set_vsync(true);
+
+    initialize_shader(*default_shader);
+    initialize_shader(*font_particle_shader);
     
     cat_sprite = create_sprite(load_texture("into_the_spiritwell_cat.png"));
     cat_sprite.anchor = .{0.5, 0.5};
@@ -20,10 +22,10 @@ main :: () {
     packet_client = packet_client_create("ws://127.0.0.1:4080");
     packet_client_add_packet(packet_client, ClientRequestJointPacket.{});
 
-    time := get_time() * 1000;
+    time := seconds_since_init() * 1000;
     last_update_time := time - TICK_DURATION;
     while !should_exit() {
-        time = get_time() * 1000;
+        time = seconds_since_init() * 1000;
 
         if time - last_update_time >= TICK_DURATION {
             update_inputs();
@@ -81,7 +83,7 @@ render :: (time: float64) {
 
     render_players(time);
 
-    draw_fps(10, 10);
+    draw_fps(10, 10, get_default_font());
 }
 
 #import "KodaJai";
